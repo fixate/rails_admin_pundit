@@ -1,6 +1,6 @@
 module RailsAdmin
-  module Extensions
-    module Pundit
+  module Pundit
+    module Extensions
       # This adapter is for the Pundit[https://github.com/elabs/pundit] authorization library.
       # You can create another adapter for different authorization behavior, just be certain it
       # responds to each of the public methods here.
@@ -16,9 +16,11 @@ module RailsAdmin
           begin
             @controller.policy(record)
           rescue ::Pundit::NotDefinedError
-            ::ApplicationPolicy.new(@controller.send(:_current_user), record)
+            klass = ::RailsAdmin::Pundit.configuration.default_policy_class
+            klass.new(@controller.send(:_current_user), record)
           end
         end
+
         private :policy
 
         # This method is called in every controller action and should raise an exception

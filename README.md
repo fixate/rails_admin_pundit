@@ -16,7 +16,7 @@ And then execute:
 
 1. First of all you need to configure Pundit (if you configured it already, skip this step).
     Include Pundit in your application controller:
-    
+
     ``` ruby
     class ApplicationController < ActionController::Base
       include Pundit
@@ -25,11 +25,11 @@ And then execute:
     ```
 
     Run the generator, which will set up an application policy:
-    
+
     ``` sh
     rails g pundit:install
     ```
-    
+
     For other configurations see Pundit's readme.
 
 2. In your `app/policies/application_policy.rb` policy you need to add rails_admin? method:
@@ -61,16 +61,16 @@ And then execute:
             raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."
         end
       end
-    
+
       # Hash of initial attributes for :new, :create and :update actions. This is optional
       def attributes_for(action)
       end
-    
+
     end
     ```
-    
+
     Set pundit authorize method in `config/initializers/rails_admin.rb` initializer:
-    
+
     ``` ruby
     RailsAdmin.config do |config|
       ## == Pundit ==
@@ -78,9 +78,18 @@ And then execute:
       ......
     end
     ```
-    
+
+    Want to use a different policy class for authorization in rails_admin?
+    Use this initializer:
+
+    ``` ruby
+    RailsAdmin::Pundit.configure do |config|
+      config.default_policy_class = AdminPolicy
+    end
+    ```
+
     Now, in your model's policy you can specify a policy for rails_admin actions. For example:
-    
+
     ``` ruby
     class CityPolicy < ApplicationPolicy
       ......
@@ -94,7 +103,7 @@ And then execute:
       end
     end
     ```
-  
+
 ## Contributing
 
 1. Fork it

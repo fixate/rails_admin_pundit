@@ -12,11 +12,11 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Pundit authorization system in Rails Admin}
   gem.summary       = %q{Rails Admin integration with Pundit authorization system}
   gem.homepage      = "https://github.com/sudosu/rails_admin_pundit"
-  
+
   gem.add_runtime_dependency("pundit", ">= 0.2.3")
   gem.add_runtime_dependency("rails_admin", ">= 0.6.2")
 
-  gem.files         = `git ls-files`.split($/)
+  gem.files         = Dir['lib/**/*', '[A-Z]*'] - ['Gemfile.lock']
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
